@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="thymeleaf.org">
+
+<head th:replace="plantilla/templateKevin :: head"> <!-- este "head" es el nombre del fragmento de la etiqueta head en el template  --> 	
+</head>
+	
+<body class="bg-secondary">
+		
+	<header th:replace="plantilla/templateKevin :: header"></header>
+	
+	<div th:replace="plantilla/templateKevin :: sidebar"></div>
+		
+    <!-- MAIN -->
+    <div class="principal bg-light d-flex flex-column vh-100"> <!-- se pinta solo el tamaño de la pantalla al 100% -->
+        <!-- CONTENT -->
+        <div class="contenido bg-light h-auto px-3 py-4" id="Contenedor"> <!-- equivalente a un auto es decir se pinto solo todo el contenido-->
+            <!-- REMPLAZA TODO ESTO -->
+            
+        
+        
+            <h3>main</h3>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ab harum odio quisquam aperiam veniam consequatur eveniet ut fugiat et beatae autem ipsum laboriosam, sed voluptates cupiditate, quae exercitationem fuga.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ab harum odio quisquam aperiam veniam consequatur eveniet ut fugiat et beatae autem ipsum laboriosam, sed voluptates cupiditate, quae exercitationem fuga.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ab harum odio quisquam aperiam veniam consequatur eveniet ut fugiat et beatae autem ipsum laboriosam, sed voluptates cupiditate, quae exercitationem fuga.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ab harum odio quisquam aperiam veniam consequatur eveniet ut fugiat et beatae autem ipsum laboriosam, sed voluptates cupiditate, quae exercitationem fuga.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ab harum odio quisquam aperiam veniam consequatur eveniet ut fugiat et beatae autem ipsum laboriosam, sed voluptates cupiditate, quae exercitationem fuga.</p>
+        
+        
+        
+        </div>
+        <!-- FOOTER -->
+        <div class="pie bg-warning p-2">
+            <h3 class="m-0">footer</h3>
+        </div>
+	</div>
+	
+	<div th:replace="plantilla/templateKevin :: scripts"></div>
+	
+	
+</body>
+
+</html>
