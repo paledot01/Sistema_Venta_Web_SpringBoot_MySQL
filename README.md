@@ -21,20 +21,21 @@ Sistema web con Spring y MySQL.
 ---
 
 ### Herramientas utilizadas:
-- **JDK 8**
-- **Spring Tool Suite 4** como IDE principal para el desarrollo de este sistema.
+- **Spring Tool Suite 4 [ 4.17.1 ]** como IDE principal para el desarrollo de este sistema.
 - **MySQL** como motor de la base de datos.
-- **JasperSoft Studio** para la creacion de plantillas para los reportes en PDF y EXCEL.
+- **JasperSoft Studio [ 6.19.0 ]** para la creacion de plantillas para el reporte en PDF y EXCEL.
 - **Corel Draw** para la creación y modificación de iconos.
 - **Visual Studio Code** para la creacion del Front y la edición de este README.md.
 - **Git Bash** para subir y actualizar este repositorio.
 
-### Tecnologias:
-- Java 8
-- JQuery (AJAX)
-- Bootstrap, HTML, CSS, JS, Sass
+### Tecnologias y versiones:
+- OpenJDK 17 [ Amazon Corretto 17.0.5.8.1 LTS ]
+- Sprint Boot [ 3.0.1 ]
+- Apache Maven [ 3.0.1 ]
+- Bootstrap [ 5.2.2 ]
+- JQuery ( AJAX )
+- HTML, CSS, JS, Sass
 - Thymeleaf
-- Maven
 - Hibernate (ORM)
 - JPQL
 ---
