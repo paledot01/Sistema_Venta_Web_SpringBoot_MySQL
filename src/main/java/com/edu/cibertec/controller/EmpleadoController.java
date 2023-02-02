@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.edu.cibertec.model.Empleado;
 import com.edu.cibertec.model.EmpleadoPOJO;
@@ -22,6 +23,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
 
 @Controller
+//@RequestMapping("/empleado") //--> "/empleado/listarEmpleado" 
 public class EmpleadoController {
 
 	@Autowired
@@ -30,8 +32,7 @@ public class EmpleadoController {
 	private DistritoService distritoServ;
 	@Autowired
 	private EstadoService estadoServ;
-//	@Autowired
-//	private EmpleadoRepository empleadoRepo;
+
 
 	
 	@GetMapping("/listarEmpleado")
@@ -40,6 +41,7 @@ public class EmpleadoController {
 		modelo.addAttribute("lista_distrito", distritoServ.listar());
 		modelo.addAttribute("lista_estado", estadoServ.listar());
 		modelo.addAttribute("ultimo_codigo", empleadoServ.getUltimoCodigo());
+		
 		return "empleado"; // esto es la data lo que devuelve " empleado.html "
 	}
 

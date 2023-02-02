@@ -3,13 +3,15 @@ package com.edu.cibertec.service;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import com.edu.cibertec.model.Empleado;
 import com.edu.cibertec.model.EmpleadoPOJO;
 import com.edu.cibertec.model.EmpleadoReportePOJO;
 import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
 
-public interface EmpleadoService {
+public interface EmpleadoService extends UserDetailsService{ // <----------------
 
 	public List<Empleado> listar();
 	public List<EmpleadoReportePOJO> listaReportePOJO();

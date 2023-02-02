@@ -124,6 +124,14 @@ public class EmpleadoPOJO {
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
+
+	@Override
+	public String toString() {
+		return "EmpleadoPOJO [cod_empleado=" + cod_empleado + ", cod_distrito=" + cod_distrito + ", cod_estado="
+				+ cod_estado + ", nombre=" + nombre + ", apellidos=" + apellidos + ", dni=" + dni + ", direccion="
+				+ direccion + ", telefono=" + telefono + ", email=" + email + ", usuario=" + usuario + ", contrasena="
+				+ contrasena + "]";
+	}
 	
 	
 }

@@ -3,15 +3,24 @@ package com.edu.cibertec.service.impl;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.edu.cibertec.model.Distrito;
@@ -23,6 +32,7 @@ import com.edu.cibertec.model.Rol;
 import com.edu.cibertec.repository.DistritoRepository;
 import com.edu.cibertec.repository.EmpleadoRepository;
 import com.edu.cibertec.repository.EstadoRepository;
+import com.edu.cibertec.repository.RolRepository;
 import com.edu.cibertec.service.EmpleadoService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -52,9 +62,14 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 	
 	@Autowired
 	private EstadoRepository estadoRepo;
+	
+	@Autowired
+	private RolRepository rolRepo;
 
-//	@Autowired
-//	private BCryptPasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder encriptador;
+	
+	
 	
 	// -- METODOS
 	@Override
@@ -79,8 +94,19 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 	}
 
 	@Override
-	public Empleado guardar(EmpleadoPOJO empleadoPOJO) { // Obtenemos un Empleado a partir de un EmpleadoDTO 
-		List<Rol> roles = Arrays.asList(new Rol("RL03","ROLE_USER"));
+	public Empleado guardar(EmpleadoPOJO empleadoPOJO) { // Obtenemos un Empleado a partir de un EmpleadoDTO
+		
+		Optional<Rol> optionalRol= rolRepo.findById("RL01");
+		Rol objRol= null;
+		if(optionalRol.isPresent())
+			objRol = optionalRol.get();
+		
+		Optional<Rol> optionalRol2= rolRepo.findById("RL02");
+		Rol objRol2= null;
+		if(optionalRol2.isPresent())
+			objRol2 = optionalRol2.get();
+		
+		List<Rol> roles = Arrays.asList(objRol, objRol2);
 		
 		Optional<Distrito> optionalDistrito= distritoRepo.findById(empleadoPOJO.getCod_distrito());
 		Distrito objDistrito= null;
@@ -103,7 +129,7 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 				empleadoPOJO.getTelefono(),
 				empleadoPOJO.getEmail(),
 				empleadoPOJO.getUsuario(),
-				empleadoPOJO.getContrasena(),
+				encriptador.encode(empleadoPOJO.getContrasena()), // <--- codificamos la contraseña
 				roles
 				);
 		return empleadoRepo.save(empleado); // guarda el objeto y devuelve dicho objeto
@@ -178,5 +204,27 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 		}
 		
 	}
+
+	
+	// Seguridad <-------------------------
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Empleado emp = empleadoRepo.findByUsuario(username);
+		List<GrantedAuthority> autorizacion = new ArrayList<GrantedAuthority>();
+		
+		if(emp == null) {
+			throw new UsernameNotFoundException("Usuario o password inválidos");
+		}
+		
+		for(Rol rol : emp.getRoles() ) {
+			autorizacion.add(new SimpleGrantedAuthority(rol.getNombre()));
+		}
+		System.out.println(autorizacion);
+		return new User(emp.getUsuario(), emp.getContrasena(), true, true, true, true, autorizacion); // user, pass, roles
+	}
+	
+//	private Collection<? extends GrantedAuthority> mapearAutoridadesRoles(Collection<Rol> roles){
+//		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNombre())).collect(Collectors.toList());
+//	}
 	
 }

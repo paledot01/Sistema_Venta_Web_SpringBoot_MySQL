@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="plantilla/templateKevin :: head"> <!-- este "head" es el nombre del fragmento de la etiqueta head en el template  --> 	
+<head th:insert="~{plantilla/templateKevin :: head}"> <!-- este "head" es el nombre del fragmento de la etiqueta head en el template  --> 	
 </head>
 	
 <body class="bg-secondary">
-		
-	<header th:replace="plantilla/templateKevin :: header"></header>
+	<!--	
+	<header th:replace="plantilla/templateKevin :: header"></header>  ANTIGUOS-->
+	<header th:insert="~{plantilla/templateKevin :: header}"></header>
 	
-	<div th:replace="plantilla/templateKevin :: sidebar"></div>
+	<div th:insert="~{plantilla/templateKevin :: sidebar}"></div>
 		
     <!-- MAIN -->
     <div class="principal bg-light d-flex flex-column vh-100"> <!-- se pinta solo el tamaño de la pantalla al 100% -->
@@ -34,7 +37,7 @@
         </div>
 	</div>
 	
-	<div th:replace="plantilla/templateKevin :: scripts"></div>
+	<div th:insert="~{plantilla/templateKevin :: scripts}"></div>
 	
 	
 </body>

@@ -7,4 +7,5 @@ import com.edu.cibertec.model.Rol;
 @Repository
 public interface RolRepository extends JpaRepository<Rol, String>{
 
+	
 }

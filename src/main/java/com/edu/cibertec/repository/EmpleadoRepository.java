@@ -35,4 +35,6 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, String>{
 	@Query(value="SELECT SUBSTRING(MAX(e.cod_empleado),3) FROM empleado AS e", nativeQuery = true)
 	public abstract String getUltimoCodigo();
 	
+	public Empleado findByUsuario(String usuario); // automatico
+	
 }
