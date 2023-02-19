@@ -96,17 +96,12 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 	@Override
 	public Empleado guardar(EmpleadoPOJO empleadoPOJO) { // Obtenemos un Empleado a partir de un EmpleadoDTO
 		
-		Optional<Rol> optionalRol= rolRepo.findById("RL01");
+		Optional<Rol> optionalRol= rolRepo.findById("RL02"); // USER
 		Rol objRol= null;
 		if(optionalRol.isPresent())
 			objRol = optionalRol.get();
 		
-		Optional<Rol> optionalRol2= rolRepo.findById("RL02");
-		Rol objRol2= null;
-		if(optionalRol2.isPresent())
-			objRol2 = optionalRol2.get();
-		
-		List<Rol> roles = Arrays.asList(objRol, objRol2);
+		List<Rol> roles = Arrays.asList(objRol);
 		
 		Optional<Distrito> optionalDistrito= distritoRepo.findById(empleadoPOJO.getCod_distrito());
 		Distrito objDistrito= null;
@@ -206,25 +201,5 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 	}
 
 	
-	// Seguridad <-------------------------
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Empleado emp = empleadoRepo.findByUsuario(username);
-		List<GrantedAuthority> autorizacion = new ArrayList<GrantedAuthority>();
-		
-		if(emp == null) {
-			throw new UsernameNotFoundException("Usuario o password inválidos");
-		}
-		
-		for(Rol rol : emp.getRoles() ) {
-			autorizacion.add(new SimpleGrantedAuthority(rol.getNombre()));
-		}
-		System.out.println(autorizacion);
-		return new User(emp.getUsuario(), emp.getContrasena(), true, true, true, true, autorizacion); // user, pass, roles
-	}
-	
-//	private Collection<? extends GrantedAuthority> mapearAutoridadesRoles(Collection<Rol> roles){
-//		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNombre())).collect(Collectors.toList());
-//	}
 	
 }

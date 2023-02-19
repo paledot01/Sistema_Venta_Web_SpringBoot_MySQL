@@ -11,7 +11,7 @@ import com.edu.cibertec.model.EmpleadoReportePOJO;
 import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
 
-public interface EmpleadoService extends UserDetailsService{ // <----------------
+public interface EmpleadoService { // <----------------
 
 	public List<Empleado> listar();
 	public List<EmpleadoReportePOJO> listaReportePOJO();

@@ -36,7 +36,7 @@ public class Empleado implements Serializable {
 	private String usuario;
 	private String contrasena;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)//cascade = CascadeType.ALL
 	@JoinTable(name = "empleado_rol", // Nombre de la tabla intermedia
 			joinColumns = @JoinColumn(name = "cod_empleado", referencedColumnName = "cod_empleado"), // el primer cod_empleado hace referencia a la tabla intermedia, el segundo a esta tabla empleado
 			inverseJoinColumns = @JoinColumn(name = "cod_rol", referencedColumnName = "cod_rol") // el 2do cod_rol hace referencia al pk de la tabla Rol
@@ -161,5 +161,14 @@ public class Empleado implements Serializable {
 	public void setRoles(Collection<Rol> roles) {
 		this.roles = roles;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Empleado [cod_empleado=" + cod_empleado + ", distrito=" + distrito + ", estado=" + estado + ", nombre="
+				+ nombre + ", apellidos=" + apellidos + ", dni=" + dni + ", direccion=" + direccion + ", telefono="
+				+ telefono + ", email=" + email + ", usuario=" + usuario + ", contrasena=" + contrasena + ", roles="
+				+ roles + "]";
+	}
+	
+	
 }

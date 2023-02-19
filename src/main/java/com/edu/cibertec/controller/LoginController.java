@@ -7,18 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
 
 //	@GetMapping("/")
-//	public String irLogin() {
+//	public String login() {
 //		return "redirect:/login";
 //	}
-	
-	@GetMapping("/login")
-	public String irLogin() {
+//	
+	@GetMapping("/login") // cunado te conectas a esta direcciones te devuelve la vista de login.html
+	public String login() {
 		return "login";
 	}
 	
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String index() {
 		return "index";
 	}
+	
 	
 }

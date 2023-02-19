@@ -13,6 +13,7 @@ import com.edu.cibertec.model.EmpleadoReportePOJO;
 @Repository
 public interface EmpleadoRepository extends JpaRepository<Empleado, String>{
 
+	
 	// INNER JOIN con JPQL
 	@Query("SELECT new com.edu.cibertec.model.EmpleadoReportePOJO("
 			+ "e.cod_empleado,"

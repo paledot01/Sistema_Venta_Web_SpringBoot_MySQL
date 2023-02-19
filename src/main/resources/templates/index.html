@@ -7,8 +7,8 @@
 </head>
 	
 <body class="bg-secondary">
-	<!--	
-	<header th:replace="plantilla/templateKevin :: header"></header>  ANTIGUOS-->
+	
+	<!-- <header th:replace="plantilla/templateKevin :: header"></header>  ANTIGUOS-->
 	<header th:insert="~{plantilla/templateKevin :: header}"></header>
 	
 	<div th:insert="~{plantilla/templateKevin :: sidebar}"></div>
@@ -19,16 +19,12 @@
         <div class="contenido bg-light h-auto px-3 py-4" id="Contenedor"> <!-- equivalente a un auto es decir se pinto solo todo el contenido-->
             <!-- REMPLAZA TODO ESTO -->
             
-        
-        
             <h3>main</h3>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ab harum odio quisquam aperiam veniam consequatur eveniet ut fugiat et beatae autem ipsum laboriosam, sed voluptates cupiditate, quae exercitationem fuga.</p>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ab harum odio quisquam aperiam veniam consequatur eveniet ut fugiat et beatae autem ipsum laboriosam, sed voluptates cupiditate, quae exercitationem fuga.</p>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ab harum odio quisquam aperiam veniam consequatur eveniet ut fugiat et beatae autem ipsum laboriosam, sed voluptates cupiditate, quae exercitationem fuga.</p>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ab harum odio quisquam aperiam veniam consequatur eveniet ut fugiat et beatae autem ipsum laboriosam, sed voluptates cupiditate, quae exercitationem fuga.</p>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ab harum odio quisquam aperiam veniam consequatur eveniet ut fugiat et beatae autem ipsum laboriosam, sed voluptates cupiditate, quae exercitationem fuga.</p>
-        
-        
         
         </div>
         <!-- FOOTER -->
@@ -37,8 +33,10 @@
         </div>
 	</div>
 	
-	<div th:insert="~{plantilla/templateKevin :: scripts}"></div>
+	<div th:insert="~{plantilla/templateKevin :: alertas}"></div>
 	
+	<div th:insert="~{plantilla/templateKevin :: scripts}"></div>
+
 	
 </body>
 

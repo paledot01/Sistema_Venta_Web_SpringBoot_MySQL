@@ -42,4 +42,11 @@ public class Rol implements Serializable{
 		this.nombre = nombre;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "Rol [cod_rol=" + cod_rol + ", nombre=" + nombre + "]";
+	}
+	
+	
 }

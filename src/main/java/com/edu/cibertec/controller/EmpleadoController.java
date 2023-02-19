@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
 
 @Controller
-//@RequestMapping("/empleado") //--> "/empleado/listarEmpleado" 
+@RequestMapping("/empleados") //--> "/empleado/listarEmpleado" 
 public class EmpleadoController {
 
 	@Autowired
@@ -37,7 +37,7 @@ public class EmpleadoController {
 	
 	@GetMapping("/listarEmpleado")
 	public String listarEmpleado(Model modelo) {
-		modelo.addAttribute("lista_empleado", empleadoServ.listar());
+		modelo.addAttribute("lista_empleado", empleadoServ.listar());// <-- aca se envia toda la lista de los empleados que se mostrara tanto en la tabla como en el modal para EDITAR los valores
 		modelo.addAttribute("lista_distrito", distritoServ.listar());
 		modelo.addAttribute("lista_estado", estadoServ.listar());
 		modelo.addAttribute("ultimo_codigo", empleadoServ.getUltimoCodigo());
@@ -50,7 +50,7 @@ public class EmpleadoController {
 //	    Empleado empleado= empleadoRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 		Empleado empleado= empleadoServ.getEmpleadoByCodigo(id);
 	    empleadoServ.eliminar(empleado);
-	    return "redirect:/listarEmpleado";
+	    return "redirect:/empleados/listarEmpleado";
 	}
 	
 	@ModelAttribute("empleadoPOJO") // pasa defrente a la vista sin que lo mandes, creo que todos los "model" lo hacen
@@ -62,7 +62,7 @@ public class EmpleadoController {
     @PostMapping("/guardarEmpleado") // este añade o actualiza un empleado
     public String addUser(@ModelAttribute("empleadoPOJO") EmpleadoPOJO empPOJO ) {
     	empleadoServ.guardar(empPOJO);
-        return "redirect:/listarEmpleado";
+        return "redirect:/empleados/listarEmpleado";
     }
     
     @GetMapping("/reporteEmpleadoEXCEL")

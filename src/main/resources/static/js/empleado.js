@@ -3,7 +3,7 @@ var new_cod = "";
 
 function listarEmpleado() {
 	$.ajax({
-		url: '/listarEmpleado', // direccion del controlador
+		url: '/empleados/listarEmpleado', // direccion del controlador
 		type: 'GET',
 		success: function(result) { // data es lo que devuelve el metodo que esta dentro del cotrolador en este caso empleado.html
 			$('#Contenedor').html(result);
@@ -17,8 +17,8 @@ function agregarEmpleado() {
 
 	console.log($("#frmEmpleado").serialize());
 	$.ajax({
-		url: "/guardarEmpleado",
-		type: "POST",
+		url: '/empleados/guardarEmpleado',
+		type: 'POST',
 //		data: JSON.stringify(obj),
 		data: $("#frmEmpleadoAgregar").serialize(), // el formulario ya toma todos los valores mapeados listo para enviar al controlador
 //		contentType: "application/json; charset=utf-8",
@@ -53,7 +53,7 @@ function mostrarEditarEmpleado(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11){
 	$("#telefono").val(p8);
 	$("#email").val(p9);
 	$("#usuario").val(p10);
-	$("#contrasena").val(p11);
+	$("#contrasena").val("");
 	console.log(new_cod);
 }
 
@@ -61,7 +61,7 @@ function eliminarEmpleado(cod) { // este cod llega como string
 var param = cod;
 	alert(cod);
 	$.ajax({
-		url: '/eliminarEmpleado/'+param,
+		url: '/empleados/eliminarEmpleado/'+param,
 		type: 'GET',
 //		data: { id: param }, // codigo es el nombre del parametro en el controlador
 		contentType: "application/json; charset=utf-8", // lo que se envia
