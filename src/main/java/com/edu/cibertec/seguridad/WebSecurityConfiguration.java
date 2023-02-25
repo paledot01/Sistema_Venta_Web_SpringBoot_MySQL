@@ -41,14 +41,15 @@ public class WebSecurityConfiguration {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-		// Tenga en cuenta que el orden de los elementos antMatchers() es significativo; las reglas más 
+		// Tenga en cuenta que el orden de los elementos antMatchers() es significativo; las reglas más
 		// específicas deben ir primero, seguidas de las más generales(permitAll)
 		http.httpBasic().and().authorizeHttpRequests()
+				.requestMatchers(HttpMethod.GET,"/empleados/eliminarEmpleado/**").hasAnyRole("ADMIN")
 				.requestMatchers(HttpMethod.POST,"/empleados/**").hasAnyRole("ADMIN")
 				.requestMatchers(HttpMethod.GET,"/empleados/**").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/").hasAnyRole("ADMIN","USER")
 				.requestMatchers("/img/**","/js/**","/css/**").permitAll()
-			.and().formLogin().successHandler(sucessHandler).loginPage("/login")//.loginProcessingUrl("/login")
+			.and().formLogin().successHandler(sucessHandler).loginPage("/login").loginProcessingUrl("/login")
 			.defaultSuccessUrl("/",true).permitAll()
 			.and().logout().clearAuthentication(true).invalidateHttpSession(true).logoutSuccessUrl("/login?logout").permitAll() //.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).deleteCookies("JSESSIONID") // url[logout es el parametro que se envia] - para que no invalide la session - eliminar cookies.
 			.and().csrf().disable(); // <-------- CSRF bloquea los metodos POST, y esta habilitado por defecto

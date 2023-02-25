@@ -3,7 +3,6 @@ package com.edu.cibertec.model;
 import java.io.Serializable;
 import java.util.Collection;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -12,6 +11,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "empleado")
@@ -27,13 +28,19 @@ public class Empleado implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "cod_estado")
 	private Estado estado;
+	//@Column(nullable = false)
+	@NotBlank
 	private String nombre;
+	@NotBlank
 	private String apellidos;
+	@NotBlank
 	private String dni;
 	private String direccion;
 	private String telefono;
 	private String email;
+	@NotBlank
 	private String usuario;
+	@NotBlank // cuando se codifica llega a 60 caracteres creo no se, mas o menos :D
 	private String contrasena;
 
 	@ManyToMany(fetch = FetchType.EAGER)//cascade = CascadeType.ALL

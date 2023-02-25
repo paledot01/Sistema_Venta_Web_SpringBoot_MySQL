@@ -1,3 +1,90 @@
+// ---- ALERTAS -------------------
+$(document).ready(function(){
+	
+	$("#alerta").css("transition",".4s"); // este estilo debi haberlo colocado en el CSS
+	$("#alerta").css("z-index","1080");
+
+});
+
+function mostrar_check(titulo , mensaje){
+	
+	$("#alerta").css("opacity","1");
+	$("#svg_check").addClass("d-flex");
+	$("#svg_check").css("animation","trazo_01 1.3s .3s ease infinite");
+	$("#alerta_titulo").text(titulo);
+	$("#alerta_mensaje").text(mensaje);
+	setTimeout(function(){
+		$("#alerta").css("opacity","0");
+		$("#svg_check").removeClass("d-flex");
+		$("#svg_check").css("animation","sinAnimacion 1.3s .3s ease infinite");
+	},3000);
+
+}
+
+function mostrar_cruz(titulo , mensaje){
+		
+	$("#alerta").css("opacity","1");
+	$("#svg_cruz").addClass("d-flex");
+	$("#svg_cruz_01").css("animation","trazo_02 1.3s .3s ease infinite");
+	$("#svg_cruz_02").css("animation","trazo_03 1.3s .3s ease infinite");
+	$("#alerta_titulo").text(titulo);
+	$("#alerta_mensaje").text(mensaje);
+	setTimeout(function(){
+		$("#alerta").css("opacity","0");
+		$("#svg_cruz").removeClass("d-flex");
+		$("#svg_cruz_01").css("animation","sinAnimacion 1.3s .3s ease infinite");
+		$("#svg_cruz_02").css("animation","sinAnimacion 1.3s .3s ease infinite");
+	},3000);
+
+}
+
+function mostrar_candado(titulo , mensaje){
+	
+	$("#alerta").css("opacity","1");
+	$("#svg_candado").addClass("d-flex");
+	$("#svg_candado").css("animation","movimiento_3 1.5s .4s ease infinite");
+	$("#sonido").css("animation","movimiento_1 1.5s .4s ease infinite");
+	$("#cerradura").css("animation","movimiento_2 1.5s .4s ease infinite");
+	$("#alerta_titulo").text(titulo);
+	$("#alerta_mensaje").text(mensaje);
+	setTimeout(function(){
+		$("#alerta").css("opacity","0");
+		$("#svg_candado").removeClass("d-flex");
+		$("#svg_candado").css("animation","sinAnimacion 1.5s .4s ease infinite");
+		$("#sonido").css("animation","sinAnimacion 1.5s .4s ease infinite");
+		$("#cerradura").css("animation","sinAnimacion 1.5s .4s ease infinite");
+	},3500);
+
+}
+
+// NOTA: EN LA MISMA FUNCION NO PUEDE CAMBIAR EL DISPLAY DE NONDE A BLOCK Y ALA VES LA OPCACIDAD Y ESPERAR QUE FUNCIONE LA TRANSICION, LA CAMBIO QUE QUIERES QUE SE APLIQUE LA TRANSICION DEBE ESTAR SOLA
+
+// ---------------------------------
+
+function logear(){
+	console.log($("#form_login").serialize());
+	$.ajax({
+		url: "/login",
+		type: "POST",
+		beforeSend: function(xhr){
+                    xhr.withCredentials = true;
+        	},
+		data: $("#form_login").serialize(),
+		success: function(result, status, xx) {
+
+			alert("Datos guardados");
+			console.log(result);
+			console.log(status);
+			console.log(xx);
+			//console.log(xx.getAllResponseHeaders());
+			//location.href = "/login?error";
+		},
+		error: function(data, xml) {
+			alert(errorrrrr);
+		}
+	});
+}
+
 
 var new_cod = "";
 
@@ -9,7 +96,9 @@ function listarEmpleado() {
 			$('#Contenedor').html(result);
 			new_cod = $("#cod_empleado").val(); // guardamos el el nuevo codigo de empleado que se muestra en el modal
 		},
-		error: function(data, xml) { }
+		error: function(data, xml) { 
+			alerta("error en listarEmpleado()");
+		 }
 	});
 }
 
@@ -23,13 +112,23 @@ function agregarEmpleado() {
 		data: $("#frmEmpleadoAgregar").serialize(), // el formulario ya toma todos los valores mapeados listo para enviar al controlador
 //		contentType: "application/json; charset=utf-8",
 		success: function(result) {
-			alert("Datos guardados");
+			//alert("Datos guardados");
+			mostrar_check("Felicitaciones: " , "Los datos fueron agregados");
 			$("#modalKevin").modal('hide'); // para mostrar show
 			$('#Contenedor').html(result); // VUELVE A LLAMAR LA VISTA empledo.html ORIGINAL POR LO QUE CUALQUIER CAMBIO QUE LE HICIMOS DESAPARECE.
 			new_cod = $("#cod_empleado").val();
 		},
-		error: function(data, xml) {
-			alert("Error al guardar");
+		error: function(jqXHR, textStatus, errorThrown) {
+			
+			if(jqXHR.status == 400 ){
+				mostrar_cruz("Error: ", "Error al registrar los datos");
+			} else if(jqXHR.status == 403){
+				mostrar_candado("Mensaje: ", "Acceso Denegado");
+			}
+			
+			console.log(jqXHR.status);
+			console.log(textStatus);
+			
 		}
 	});
 }
@@ -58,8 +157,8 @@ function mostrarEditarEmpleado(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11){
 }
 
 function eliminarEmpleado(cod) { // este cod llega como string
-var param = cod;
-	alert(cod);
+	var param = cod;
+	//alert(cod);
 	$.ajax({
 		url: '/empleados/eliminarEmpleado/'+param,
 		type: 'GET',
@@ -69,11 +168,16 @@ var param = cod;
 
 		success: function(result) {
 			$('#Contenedor').html(result);
-			alert("Empleado eliminado");
+			//alert("Empleado eliminado");
+			mostrar_check("Felicitaciones: " , "Datos eliminados correctamente");
 			new_cod = $("#cod_empleado").val(); // guardamos el nuevo codigo de empleado que se muestra en el modal
 		},
-		error: function(data, xml) {
-			alert("Error al intentar eliminar");
+		error: function(jqXHR, textStatus, errorThrown) {
+			if(jqXHR.status == 403){
+				mostrar_candado("Mensaje: ", "Acceso Denegado");
+			}
+			console.log(jqXHR.status);
+			console.log(textStatus);
 		}
 	});
 }

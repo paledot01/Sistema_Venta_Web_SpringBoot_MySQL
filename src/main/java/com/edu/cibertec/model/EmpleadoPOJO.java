@@ -1,10 +1,13 @@
 package com.edu.cibertec.model;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class EmpleadoPOJO {
 
 	private String cod_empleado;
 	private String cod_distrito;
 	private String cod_estado;
+	@NotBlank
 	private String nombre;
 	private String apellidos;
 	private String dni;

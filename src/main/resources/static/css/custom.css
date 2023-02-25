@@ -107,6 +107,7 @@ $input-focus-color:                    $light; // texto al escribir
   position: fixed;
   bottom: 30px;
   right: 10px;
+  opacity: 0;
 }
 
 .alerta_img {

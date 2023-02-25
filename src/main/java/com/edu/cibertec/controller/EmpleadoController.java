@@ -1,17 +1,26 @@
 package com.edu.cibertec.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.edu.cibertec.model.Empleado;
 import com.edu.cibertec.model.EmpleadoPOJO;
@@ -20,6 +29,7 @@ import com.edu.cibertec.service.EmpleadoService;
 import com.edu.cibertec.service.EstadoService;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import net.sf.jasperreports.engine.JRException;
 
 @Controller
@@ -52,7 +62,7 @@ public class EmpleadoController {
 	    empleadoServ.eliminar(empleado);
 	    return "redirect:/empleados/listarEmpleado";
 	}
-	
+		
 	@ModelAttribute("empleadoPOJO") // pasa defrente a la vista sin que lo mandes, creo que todos los "model" lo hacen
 	public EmpleadoPOJO getEmpleadoPOJO() {
 		EmpleadoPOJO empleadoPOJO = new EmpleadoPOJO();

@@ -18,36 +18,43 @@
                     <h1 class="fs-3 fw-light">Login</h1>
                 </div>
                 <div class="border border-secondary rounded-3 bg-primary p-4 mt-4">
-
+					
                     <form class="form-signin" th:action="@{/login}" method="post">
                         <label for="username" class="fw-light text-light mb-2">Usuario</label>
                         <input type="text" id="username" name="username" class="login_input border border-secondary rounded-3 bg-dark w-100 fw-light text-light mb-3" autocomplete="off" required autofocus>
                         <label for="password" class="fw-light text-light mb-2">Contraseña</label>
-                        <input type="password" id="password" name="password" class="login_input border border-secondary rounded-3 bg-dark w-100 fw-light text-light mb-4" required>
+                        <input type="password" id="password" name="password" class="login_input border border-secondary rounded-3 bg-dark w-100 fw-light text-light mb-4" required>-->
                         <!--<button class="btn btn-success w-100" type="submit">Entrar</button>--><!-- onclick="location.href='main.html'" -->
                         <input class="btn btn-success w-100" type="submit" value="Log in" />
                     </form>
+                    
+                    <!--
+                    <form id="form_login" class="">
+                        <label for="username" class="fw-light text-light mb-2">Usuario</label>
+                        <input type="text" id="username" name="username" class="login_input border border-secondary rounded-3 bg-dark w-100 fw-light text-light mb-3" autocomplete="off" required autofocus>
+                        <label for="password" class="fw-light text-light mb-2">Contraseña</label>
+                        <input type="password" id="password" name="password" class="login_input border border-secondary rounded-3 bg-dark w-100 fw-light text-light mb-4" required>
+                        
+                        <input class="btn btn-success w-100" type="button" value="Log in" onclick="logear()"/>
+                    </form>-->
                 
                 </div>
-            </div>
-
+            </div><!--
+			<a href="javascript:;" class="btn btn-success w-100" onclick="mostrar();">mostrar</a>
+			<a href="javascript:;" class="btn btn-success w-100" onclick="ocultar();">ocultar</a>-->
         </main>
+        
         <div th:if="${param.error}">
 			Invalid username and password.</div>
 		<div th:if="${param.logout}">
 			You have been logged out.</div>
+		
 	</div>
 	
 	
-	<!-- ALERTAS-->
-	<div id="alerta" class="d-none bg-primary border border-secondary rounded-2 fw-light text-light alerta">
+	<!-- ALERTAS CRUZ-LOGIN -->
+	<div th:if="${param.error}" id="alerta_log_cruz" class="d-flex bg-primary border border-secondary rounded-2 fw-light text-light alerta">
 		<div class="alerta_img rounded-2 d-flex justify-content-center">
-	
-			<svg id="svg_check" viewBox="0 0 135 97" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<g>
-					<path id="Vector_1" d="M10.6671 48.4628L48.4627 86.2565L124.052 10.6672" stroke-width="21.3322" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round" />
-				</g>
-			</svg>
 	
 			<svg id="svg_cruz" viewBox="0 0 116 116" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g id="svg_cruz_01">
@@ -58,52 +65,52 @@
 				</g>
 			</svg>
 	
-			<svg id="svg_excl" viewBox="0 0 37 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<g id="svg_excl_01">
-					<path id="Vector_2" d="M18.0051 10.6667V105.155" stroke-width="21.333" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round" />
-				</g>
-				<g id="svg_excl_02">
-					<path id="Vector" d="M18.0051 173.186C24.2672 173.186 29.3436 165.571 29.3436 156.178C29.3436 146.785 24.2672 139.17 18.0051 139.17C11.7431 139.17 6.6667 146.785 6.6667 156.178C6.6667 165.571 11.7431 173.186 18.0051 173.186Z" stroke-width="13.3334" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round" />
-				</g>
-			</svg>
+		</div>
+		<div class="alerta_texto">
+			<div id="alerta_titulo" class="alerta_titulo px-2">
+				Error :
+			</div>
+			<div class="alerta_mensaje px-2 d-flex align-items-center justify-content-center">
+				<div id="alerta_mensaje" class="text-center">
+					Datos incorrectos.
+				</div>
+			</div>
+		</div>
+	</div><!-- end ALERTAS -->
 	
-			<svg id="svg_candado" viewBox="0 0 81 130" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<g id="sonido">
-					<path id="Vector_2" d="M40.6687 0H40.0144C37.927 0 36.2348 1.90354 36.2348 4.25168V13.4572C36.2348 15.8053 37.927 17.7088 40.0144 17.7088H40.6687C42.7561 17.7088 44.4483 15.8053 44.4483 13.4572V4.25168C44.4483 1.90354 42.7561 0 40.6687 0Z" />
-					<path id="Vector_3" d="M16.8391 6.20478L16.2719 6.53223C14.4643 7.57586 13.9506 10.0702 15.1246 12.1035L19.7275 20.0761C20.9015 22.1094 23.3185 22.9117 25.1261 21.8681L25.6933 21.5407C27.5009 20.497 28.0146 18.0027 26.8406 15.9694L22.2377 7.99678C21.0637 5.96346 18.6467 5.16116 16.8391 6.20478Z" />
-					<path id="Vector_4" d="M64.411 6.53199L63.8438 6.20454C62.0362 5.16091 59.6192 5.96321 58.4453 7.99653L53.8423 15.9691C52.6684 18.0024 53.182 20.4968 54.9897 21.5404L55.5568 21.8679C57.3644 22.9115 59.7815 22.1092 60.9554 20.0759L65.5584 12.1033C66.7323 10.07 66.2186 7.57562 64.411 6.53199Z" />
-				</g>
-				<g id="cerradura">
-					<path id="Vector_5" fill-rule="evenodd" clip-rule="evenodd" d="M55.8379 52.0746L62.6033 52.0511V48.3736L55.8379 41.6081V30.3416C55.8379 21.7832 48.9 14.8452 40.3415 14.8452C31.7831 14.8452 24.8452 21.7832 24.8452 30.3416V76.8015C24.8452 77.8681 23.9811 78.7314 22.9153 78.7314H12.4133C11.3467 78.7314 10.4834 77.8673 10.4834 76.8015V30.3416C10.4834 13.8516 23.8515 0.483475 40.3415 0.483475C56.8316 0.483475 70.1997 13.8516 70.1997 30.3416V57.8163C70.1997 58.8829 69.3356 59.7462 68.2698 59.7462H57.7678C56.7012 59.7462 55.8379 58.8821 55.8379 57.8163V52.0754V52.0746Z" />
-				</g>
-				<g id="cerradura_inf">
-					<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M11.3386 66.8744H69.3445C75.5811 66.8744 80.6831 71.9764 80.6831 78.2131V118.164C80.6831 124.401 75.5811 129.503 69.3445 129.503H11.3386C5.10201 129.503 0 124.401 0 118.164V78.2131C0 71.9764 5.10201 66.8744 11.3386 66.8744ZM45.8056 99.7492V113.828C45.8056 115.119 44.7495 116.175 43.4578 116.175H36.8252C35.5335 116.175 34.4775 115.119 34.4775 113.828V99.7492C31.2138 97.8129 29.0256 94.2536 29.0256 90.1833C29.0256 84.0439 34.0021 79.0674 40.1415 79.0674C46.2809 79.0674 51.2574 84.0447 51.2574 90.1833C51.2574 94.2544 49.0692 97.8129 45.8047 99.75L45.8056 99.7492Z" />
+	<!-- ALERTAS CHEAK-LOGOUT -->
+	<div th:if="${param.logout}" id="alerta_log_check" class="d-flex bg-primary border border-secondary rounded-2 fw-light text-light alerta">
+		<div class="alerta_img rounded-2 d-flex justify-content-center">
+	
+			<svg id="svg_check" viewBox="0 0 135 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<g>
+					<path id="Vector_1" d="M10.6671 48.4628L48.4627 86.2565L124.052 10.6672" stroke-width="21.3322" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round" />
 				</g>
 			</svg>
 	
 		</div>
 		<div class="alerta_texto">
 			<div id="alerta_titulo" class="alerta_titulo px-2">
-				Titulo :
+				Felicitaciones :
 			</div>
 			<div class="alerta_mensaje px-2 d-flex align-items-center justify-content-center">
 				<div id="alerta_mensaje" class="text-center">
-					Mensaje de la alerta.
+					Cerraste sesión correctamente.
 				</div>
 			</div>
 		</div>
 	</div><!-- end ALERTAS -->
 	
 	
-	<div th:insert="~{plantilla/templateKevin :: scripts}"></div>
-	
-	<!-- SCRIPTS
+	<!-- SCRIPTS -->
 	<div th:fragment = "scripts">
-		
-    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    	
+		<!-- Boostrap JavaScript Bundle with Popper -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    	<!-- JQuery -->
     	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-	</div>-->
+    	<!-- Scripts, de todos los mantenimientos que se deben cargar desde el index-->
+    	<script type="text/javascript" th:src="@{/js/login.js}"></script>
+	</div>
 	
 </body>
 </html>
