@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"><!-- esta direcciona requiere de una dependencia extra de Thymeleaf en la version security6 -->
+	
 <head th:insert="~{plantilla/templateKevin :: head}"> <!-- este "head" es el nombre del fragmento de la etiqueta head en el template  --> 	
 </head>
 	
@@ -25,7 +23,25 @@
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ab harum odio quisquam aperiam veniam consequatur eveniet ut fugiat et beatae autem ipsum laboriosam, sed voluptates cupiditate, quae exercitationem fuga.</p>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ab harum odio quisquam aperiam veniam consequatur eveniet ut fugiat et beatae autem ipsum laboriosam, sed voluptates cupiditate, quae exercitationem fuga.</p>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur ab harum odio quisquam aperiam veniam consequatur eveniet ut fugiat et beatae autem ipsum laboriosam, sed voluptates cupiditate, quae exercitationem fuga.</p>
-        
+	        <br>
+
+			<div>
+				<label>Usuario del empleado autenticado: </label>
+				<label sec:authentication="name" class="text-danger"></label>
+			</div><!--
+			Nombre del empleado autenticado:
+		    <div sec:authentication="principal.nombre"></div>
+		    Apellido del empleado autenticado:
+		    <div sec:authentication="principal.apellidos"></div>-->
+		    <div>
+				<label>Roles del empleado autenticado: </label>
+				<label sec:authentication="principal.authorities" class="text-danger"></label>
+			</div>
+		    <br>
+		    <div sec:authentication="principal" class="text-danger"></div>
+
+			
+			
         </div>
         <!-- FOOTER -->
         <div class="pie bg-warning p-2">

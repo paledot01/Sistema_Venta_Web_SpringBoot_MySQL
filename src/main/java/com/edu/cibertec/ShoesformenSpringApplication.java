@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-
 @SpringBootApplication
 public class ShoesformenSpringApplication {
 	
@@ -15,9 +14,7 @@ public class ShoesformenSpringApplication {
 }
 
 
-
 // Esta interfaz realiza cualquier accion inmediatamente despues de que se haya iniciado la aplicacion.
-
 
 //@SpringBootApplication
 //public class ShoesformenSpringApplication implements CommandLineRunner{

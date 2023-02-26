@@ -3,23 +3,15 @@ package com.edu.cibertec.service.impl;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -164,11 +156,11 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 		String imagen = "logo_reporte_2.png";
 		parametros.put("imagen_logo","src/main/resources/static/img/" + imagen);
 		parametros.put("nombre_empresa","SHOES FOR MEN");
-		parametros.put("direccion_empresa","AV. URUGUAY N 389 ");
+		parametros.put("direccion_empresa","AV. URUGUAY N 000 ");
 		parametros.put("distrito_empresa","SAN ISIDRO");
-		parametros.put("nombre_empleado","KEVIN BASILIO");
-		parametros.put("ruc_empresa","12345678901");
-		parametros.put("telefono_empresa","123-4567");
+		parametros.put("nombre_empleado","KEVIN B");
+		parametros.put("ruc_empresa","55555555555");
+		parametros.put("telefono_empresa","777-7777");
 		parametros.put("fecha_generacion", fecha1);
 		parametros.put("DataEmpleado", dataSource);
 		

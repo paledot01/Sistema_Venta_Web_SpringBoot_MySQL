@@ -23,5 +23,4 @@ public class DistritoServiceImpl implements DistritoService {
 	}
 
 	
-	
 }

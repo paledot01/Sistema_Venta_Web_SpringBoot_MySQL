@@ -5,7 +5,6 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 
 
-
 @Component
 public class LoginSucessHandler extends SimpleUrlAuthenticationSuccessHandler{
 

@@ -22,7 +22,7 @@ UNIQUE INDEX distrito_unicos (descripcion ASC)
 );
 
 CREATE TABLE estado(
-cod_estado     int(1),
+cod_estado     char(1),
 descripcion    varchar(25) NOT NULL,
 PRIMARY KEY(cod_estado),
 UNIQUE INDEX estado_unicos (descripcion ASC)
@@ -86,8 +86,8 @@ UNIQUE INDEX nombre_unico (nombre ASC)
 CREATE TABLE empleado(
 cod_empleado    char(7),
 cod_distrito    char(4),
-cod_estado      int(1),
-nombre          varchar(25) NOT NULL,
+cod_estado      char(1),
+nombre          varchar(25) NOT NULL,-- CHECK (nombre != "") ,
 apellidos       varchar(25) NOT NULL,
 dni             char(8) NOT NULL,
 direccion       varchar(45),
@@ -206,10 +206,10 @@ insert modelo (cod_modelo,cod_marca,cod_categoria,nombre_modelo,precio_compra,pr
 insert modelo (cod_modelo,cod_marca,cod_categoria,nombre_modelo,precio_compra,precio_venta) value ('MD10008','MA10001','CT02','ZALITH001',78.00,149.00);
 insert modelo (cod_modelo,cod_marca,cod_categoria,nombre_modelo,precio_compra,precio_venta) value ('MD10009','MA10003','CT01','IMBROS410',67.00,111.00);
 -- ROL
-insert rol (cod_rol,nombre) value ('RL01','ADMIN');
-insert rol (cod_rol,nombre) value ('RL02','USER');
+insert rol (cod_rol,nombre) value ('RL01','ROLE_ADMIN');
+insert rol (cod_rol,nombre) value ('RL02','ROLE_USER');
 -- EMPLEADO
-insert empleado (cod_empleado,cod_distrito,cod_estado,nombre,apellidos,dni,direccion,telefono,email,usuario,contrasena) value ('EM10001','DI01',1,'KEVIN','BAS','44455500','JR. 2 DE MAYO #43','999333555','paledot01@gmail.com','admin','admin');
+insert empleado (cod_empleado,cod_distrito,cod_estado,nombre,apellidos,dni,direccion,telefono,email,usuario,contrasena) value ('EM10001','DI01',1,'KEVIN','B','00000000','DIRECCION','999999999','paledot01@gmail.com','kevinB','$2a$10$Jtfxa0EuEjZrfQ4OvR4WbuqD00OBIfIp.5Sv33A7G8ya3xTI542nq');/*
 insert empleado (cod_empleado,cod_distrito,cod_estado,nombre,apellidos,dni,direccion,telefono,email,usuario,contrasena) value ('EM10002','DI05',0,'ANGELICA','ANDRADE CERNA','40138356','JR.M ANUEL PRADO #250','970315487','ANDRADE@gmail.com','angelicaa','40138356');
 insert empleado (cod_empleado,cod_distrito,cod_estado,nombre,apellidos,dni,direccion,telefono,email,usuario,contrasena) value ('EM10003','DI02',1,'ROSAURA','TARAZONA RIVAS','40457140','JR. LOS ROSALES #350', '993315487','TARANOZA@gmail.com','rosaurat','40457140');
 insert empleado (cod_empleado,cod_distrito,cod_estado,nombre,apellidos,dni,direccion,telefono,email,usuario,contrasena) value ('EM10004','DI04',0,'RUTH','TARDIO HUAMAN','40198740','AV. JOSE BALTA #170', '990115487','TARDIO@gmail.com','rutht','40198740');
@@ -233,11 +233,11 @@ insert empleado (cod_empleado,cod_distrito,cod_estado,nombre,apellidos,dni,direc
 insert empleado (cod_empleado,cod_distrito,cod_estado,nombre,apellidos,dni,direccion,telefono,email,usuario,contrasena) value ('EM10022','DI01',0,'ANGELA','APARICIO SEGURA','53617235','AV. BRASIL #446', '985783623','ANGELA@gmail.com','angelaa','53617235');
 insert empleado (cod_empleado,cod_distrito,cod_estado,nombre,apellidos,dni,direccion,telefono,email,usuario,contrasena) value ('EM10023','DI03',1,'MARIO','ALVARO IBAÑEZ','43758266','AV. TACNA #43', '974612534','ALVARO@gmail.com','marioa','43758266');
 insert empleado (cod_empleado,cod_distrito,cod_estado,nombre,apellidos,dni,direccion,telefono,email,usuario,contrasena) value ('EM10024','DI05',1,'CATALINA','MENDEZ HUERTA','44672834','AV. BERTOLOTTO #532', '973625367','MENDEZ@gmail.com','catalinam','44672834');
-insert empleado (cod_empleado,cod_distrito,cod_estado,nombre,apellidos,dni,direccion,telefono,email,usuario,contrasena) value ('EM10025','DI01',1,'JOSE','SAEZ RAYA','28678543','AV. LIMA #51', '964732876','SAEZ@gmail.com','joses','28678543');
+insert empleado (cod_empleado,cod_distrito,cod_estado,nombre,apellidos,dni,direccion,telefono,email,usuario,contrasena) value ('EM10025','DI01',1,'JOSE','SAEZ RAYA','28678543','AV. LIMA #51', '964732876','SAEZ@gmail.com','joses','28678543');*/
 -- EMPLEADO-ROL
 insert empleado_rol (cod_rol,cod_empleado) value ('RL01','EM10001');
 insert empleado_rol (cod_rol,cod_empleado) value ('RL02','EM10001');
-insert empleado_rol (cod_rol,cod_empleado) value ('RL02','EM10002');
+-- insert empleado_rol (cod_rol,cod_empleado) value ('RL02','EM10002');
 -- CLIENTE
 insert cliente (cod_cliente,cod_distrito,nombre,apellidos,dni,direccion,telefono,email) value ('CL100001','DI02','ANETH LUANA','TINEO URIBE','32425643','AV. LOS GIRASOLES # 1800','990990230','LUANITAHERMOSA@GMAIL.COM');
 insert cliente (cod_cliente,cod_distrito,nombre,apellidos,dni,direccion,telefono,email) value ('CL100002','DI03','JOSE LUIS','TARAZONA ZELA','78395021','AV. LAS FLORES # 1800',null,'JOSESITO@GMAIL.COM');
@@ -255,13 +255,13 @@ insert calzado (cod_calzado,cod_modelo,cod_talla,cod_color,codigo,descripcion,st
 insert calzado (cod_calzado,cod_modelo,cod_talla,cod_color,codigo,descripcion,stock,stock_minimo) value ('CZ100008','MD10004','TL03','CR04',null,null,8,0);
 insert calzado (cod_calzado,cod_modelo,cod_talla,cod_color,codigo,descripcion,stock) value ('CZ100009','MD10006','TL02','CR01',null,null,3); -- <--------- DEFAULT
 -- BOLETA   omitimos el IGV porque se añade por defecto
-insert boleta (cod_boleta,cod_cliente,cod_empleado,cod_moneda,fecha_hora_emision,total) value ('BL100001','CL100001','EM10001','MN01',NOW(),0);
+insert boleta (cod_boleta,cod_cliente,cod_empleado,cod_moneda,fecha_hora_emision,total) value ('BL100001','CL100001','EM10001','MN01',NOW(),0);/*
 insert boleta (cod_boleta,cod_cliente,cod_empleado,cod_moneda,fecha_hora_emision,total) value ('BL100002','CL100002','EM10002','MN01',NOW(),0);
 insert boleta (cod_boleta,cod_cliente,cod_empleado,cod_moneda,fecha_hora_emision,total) value ('BL100003','CL100003','EM10003','MN01',NOW(),0);
-insert boleta (cod_boleta,cod_cliente,cod_empleado,cod_moneda,fecha_hora_emision,total) value ('BL100004','CL100003','EM10003','MN01',NOW(),0);
+insert boleta (cod_boleta,cod_cliente,cod_empleado,cod_moneda,fecha_hora_emision,total) value ('BL100004','CL100003','EM10003','MN01',NOW(),0);*/
 -- DETALLE BOLETA   colocamos el descuento
 insert detalle_boleta (cod_boleta,cod_calzado,cantidad,descuento,subtotal) value ('BL100001','CZ100001',2,0,180.00);
-insert detalle_boleta (cod_boleta,cod_calzado,cantidad,descuento,subtotal) value ('BL100001','CZ100006',1,0,110.00);
+insert detalle_boleta (cod_boleta,cod_calzado,cantidad,descuento,subtotal) value ('BL100001','CZ100006',1,0,110.00);/*
 insert detalle_boleta (cod_boleta,cod_calzado,cantidad,descuento,subtotal) value ('BL100002','CZ100002',1,0,90.00);
 insert detalle_boleta (cod_boleta,cod_calzado,cantidad,descuento,subtotal) value ('BL100002','CZ100008',1,0,142.00);
 insert detalle_boleta (cod_boleta,cod_calzado,cantidad,descuento,subtotal) value ('BL100003','CZ100009',2,0,224.00);
@@ -269,7 +269,7 @@ insert detalle_boleta (cod_boleta,cod_calzado,cantidad,descuento,subtotal) value
 insert detalle_boleta (cod_boleta,cod_calzado,cantidad,descuento,subtotal) value ('BL100004','CZ100003',2,0,248.00);
 insert detalle_boleta (cod_boleta,cod_calzado,cantidad,descuento,subtotal) value ('BL100004','CZ100005',3,0,330.00);
 insert detalle_boleta (cod_boleta,cod_calzado,cantidad,descuento,subtotal) value ('BL100004','CZ100002',1,0,90.00);
-insert detalle_boleta (cod_boleta,cod_calzado,cantidad,descuento,subtotal) value ('BL100004','CZ100004',2,0,248.00);
+insert detalle_boleta (cod_boleta,cod_calzado,cantidad,descuento,subtotal) value ('BL100004','CZ100004',2,0,248.00);*/
 
 -- select * from distrito;
 -- select * from estado;

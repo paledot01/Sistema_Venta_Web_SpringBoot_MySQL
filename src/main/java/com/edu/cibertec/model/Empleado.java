@@ -12,7 +12,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "empleado")
@@ -29,7 +28,7 @@ public class Empleado implements Serializable {
 	@JoinColumn(name = "cod_estado")
 	private Estado estado;
 	//@Column(nullable = false)
-	@NotBlank
+	@NotBlank // no null no vacion ""
 	private String nombre;
 	@NotBlank
 	private String apellidos;

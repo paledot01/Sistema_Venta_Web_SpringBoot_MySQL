@@ -15,7 +15,7 @@ public class EstadoServiceImpl implements EstadoService{
 	@Autowired
 	private EstadoRepository repositorio;
 
-	
+
 	// --> Metodos
 	@Override
 	public List<Estado> listar() {

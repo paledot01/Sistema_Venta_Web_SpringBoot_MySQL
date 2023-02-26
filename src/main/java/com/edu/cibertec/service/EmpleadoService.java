@@ -3,8 +3,6 @@ package com.edu.cibertec.service;
 import java.io.IOException;
 import java.util.List;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
-
 import com.edu.cibertec.model.Empleado;
 import com.edu.cibertec.model.EmpleadoPOJO;
 import com.edu.cibertec.model.EmpleadoReportePOJO;
