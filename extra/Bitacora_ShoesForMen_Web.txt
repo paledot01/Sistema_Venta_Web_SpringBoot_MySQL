@@ -1,0 +1,321 @@
+Boleta - Factura
+- La factura se entrega a intermediarios, por ejemplo a una empresa, mientras que la boleta si va dirigido al 
+  consumidor final.
+- La factura permite al intermediario permite acceder al rembolso del pago del impuesto al Valor Agregado, 
+  porque por ley al que le corresponde pagar el IVA es el consumidor final.
+- algunos ponen "boleta electronica/boleta de venta electronica"
+
+RAZON SOCIAL: nombre con que una entidad o sociedad mercantil esta registrada legalmente.
+
+RUC: 11 digitos
+
+IGV
+- para manejar el IGV, manejaremos y almacenaremos los precios que ya incluyen el impuesto. Para mostrar el precio 
+  real sin el impuesto realizaremos las operaciones dentro del sistema, para obtener estos valores.
+
+CODIGOS PARA LOS REGISTROS DE LAS TABLAS
+- Distrito  -> DI01
+- Estado    -> 0
+- Moneda    -> MN01
+- Cargo     -> CA01
+- Talla     -> TL01
+- Color     -> CR01
+- Categoria -> CT01
+- Marca     -> MA10001
+- Modelo    -> MD10001
+- Empleado  -> EM10001
+- Cliente   -> CL100001
+- Calzado   -> CZ100001
+- Boleta    -> BL100001
+
+Versiones:
+
+OpenJDK 17 [Amazon Corretto 17.0.5.8.1 LTS]
+Spring Tool Suite 4 [4.17.1]
+Sprint Boot Version 3.0.1
+Apache Maven 3.8.7
+Bootstrap [v5.2.2]
+
+---------------------------------------------------------------------------------------------------------------- 
+
+- Cuando quieres guardar una entidad mapeada y este tiene como atributo un objeto, JPA busca dentro del objeto el 
+"id_especificado" para poder guardar y este debe tener el mismo nombre que en la BD, ahora que pasa cuando dentro 
+la entidad mapeada tiene un objeto pero ninguno de los atributos que este posee hace referencia algun atributo 
+dentro de la tabla a la que hace referencia en la BD? pues muy simple, al no encontrar ninguna referencia, 
+simplemente la ignora al querer guardar en la BD.
+
+- El metodo findById() del JPARepository devuelve un Optional<Obj> es decir puede o no devolver nada pero no 
+  devuelve null porlo que ahi hay una ecepcion que debe convertir ese optional a un null o otra cosa.
+
+- Redirect manda a ejecutar la otra direccion  o meotod de este mismo controlador que sera la que finalmente 
+  terminara mostrando la pagina visual, osea el redirect no envia a una pagina si no que se la encarga a la nueva 
+  direccion.
+
+-> @Query [ https://www.baeldung.com/jpa-queries-custom-result-with-aggregation-functions ]
+	- para personalizar el resultado de consultas JPA podemos usar una expresion de constructor JPQL para 
+          personalizar el resultado para esto necesitaremos la direccion del POJO.
+		@Query("SELECT new com.baeldung.aggregation.model.custom.EntityPOJO(c.year, COUNT(c.year)) "
+  		+ "FROM Comment AS c GROUP BY c.year ORDER BY c.year DESC")
+		List<EntityPOJO> countTotalCommentsByYearClass();
+	- la otra manera es creando una interfaz que contendra los atributos, esto es mas complejo pero al parecer 
+          mas recomendado porque tanbien tiene otras funcionalidades.
+	- las consultas se pueden hacer con JPQL y de forma nativa como la BD que estes usando. la nativa es 
+	  recomendado para consultas mas complejas. [ https://www.baeldung.com/spring-data-jpa-query ] [ https://thorben-janssen.com/native-queries-with-spring-data-jpa/ ]
+
+
+-> Jasper excel [ https://www.youtube.com/watch?v=4oj0gTdPvNM&t=68s ]  [ https://jasperreports.sourceforge.net/config.reference.html ]
+	- codigo para exportacion en formato XLS, personaliza la plantilla para que se muestre perfecto y 
+	  listo para trabajar con los datos en EXCEL. se agrega en codigo XML de la plantilla debajo 
+	  de la primera propiedad. arriba rriba.
+
+ORIGINAL
+
+<property name="net.sf.jasperreports.export.xls.exclude.origin.keep.first.band.1" value="pageHeader"/>
+<property name="net.sf.jasperreports.export.xls.exclude.origin.band.2" value="pageFooter"/>
+<property name="net.sf.jasperreports.export.xls.exclude.origin.band.3" value="lastPageFooter"/>
+<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
+<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="true"/>
+<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+<property name="net.sf.jasperreports.export.xls.ignore.graphics" value="false"/>
+<property name="net.sf.jasperreports.export.xls.ignore.cell.border" value="true"/>
+<property name="net.sf.jasperreports.export.xls.ignore.cell.background" value="true"/>
+
+UTILIZADO
+
+<property name="net.sf.jasperreports.export.xlsx.exclude.origin.keep.first.band.1" value="pageHeader"/>
+<property name="net.sf.jasperreports.export.xlsx.exclude.origin.band.2" value="pageFooter"/>
+<property name="net.sf.jasperreports.export.xlsx.exclude.origin.band.3" value="lastPageFooter"/>
+<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
+<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+<property name="net.sf.jasperreports.export.xls.ignore.graphics" value="false"/> --> ignora todos los graficos e imagenes que pueda tener la plantilla
+<property name="net.sf.jasperreports.export.xls.ignore.cell.border" value="false"/> --> elimina los border de la plantilla que se mostrará en el excel.
+<property name="net.sf.jasperreports.export.xls.ignore.cell.background" value="false"/> --> elimina todos los fondos de las celdas en xls, pero si lo cambias a xlsx se elimina todo los estilos de las celdas.
+<property name="net.sf.jasperreports.export.xls.image.anchor.type" value="MoveSize"/>  --> cuando modificas la celda que contiene la imagen esta se mueve con la celda y modifica tu tamaño (ancho y alto) con el. -MoveSize(move y size)-MoveNoSize(solo move)-NoMoveNoSize(ninguno) 
+<property name="net.sf.jasperreports.export.xlsx.exclude.key.imagen_borde"/> --> permite excluir de la exportacion (xlsx) el elemento(rectangulo) cuyo key es "imagen_borde". la Key se debe añadir en las propiedades del elemento.
+
+
+[ https://community.jaspersoft.com/wiki/size-exported-excel-column-width-not-same-size-width-defined-text-element#Related_Articles: ]
+--> esto fuerza el ancho de un elemento en pixeles cuando se exporta a excel, esta propiedad debe COLOCARSE SOLO dentro del elemento en el xml.
+--> el ANCHO de los elementos en la plantilla pasan al excel x1.17, si fuera 10 en excel será 12 (el alto es x1.33 no comprobado), PERO los pixeles de la plantilla y del excel no son iguales, por lo que debes probar valores.
+--> si colocas la propiedad a una imagen que ocuparia varias columnas, el VALUE del ancho especificado solo afectará al ancho de la primera columna. RECOMENDACION usalos en los rectangulos invisibles, evita usarlo en otros componentes.
+--> para ver los pixeles en el excel, le das click como si fueras a modificar el ancho o alto de la celda y se mostrará.
+<property name="net.sf.jasperreports.export.xls.column.width" value="81"/>
+
+	- para eliminar la advertencia EN EXCEL de los campos que son string pero solo contienen numeros, en la 
+	  misma advertencia entras a configuracion y hay una opcion especifica que debes de desmarcar para
+	  que no vuelva aparecer.
+
+	NOTA:
+	- cuando en el jasper hay un elemento que esta encima de otro, cuando se exporta en excel solo se mostrara 
+          el elemento superior.
+	- El orden de la lista de elementos en la platilla representa tambien los elementos que estan encima de otro.
+	- si los componentes que se crean en la plantilla tienen dimensiones superiores a la celda en el Excel 
+          estos en la representacion estirarán la celda en ancho y alto afectando a todas las filas y columnas 
+          en el excel. para evitar esto crea en la plantilla cuadrados de prefenencia con las mismas dimensiones 
+          de una celda (15x55), transparentes y sin borde, tambien ubicalos debajo de todos los componentes cambiando 
+          la ubicacion de los componentes en la lista.
+	- las imagenes que tienen borde, cuando se muestra en el EXCEL esta se mostrara con un pequeño padinng blanco.
+	- 
+
+
+GIT:
+	- clonar un repositorio : $ git clone [DIRECCIÓN HTTPS, SE ENCUANETRA EN EL PROYECTO EN GITHUB]
+	- [ https://www.freecodecamp.org/espanol/news/como-hacer-tu-primer-pull-request-en-github/ ]
+
+	Clonar Repo desde IDE:
+	- Windows/Show View/Other/Git/Git Reflog, Git Repositories, Git staging.
+	- Git Hub/Proyecto a clonar/copiamos la direccion en la seccione Clone.
+	- IDE/Git Repositories/Clone Git Repositories/ Pegas la URL
+	- Git Hub/Settings/Developer settings/Personal access tokens/Tokens(classic)/Generate new token(classic)/
+	  /pones una nota, das los permisos/Generate token/guardamos el codigo generado [ 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 ]
+	- IDE/colocamos el usuario, password(token) y check en "Store in Secure Store"/Next/Next/buscamos el WorkSpace o carpeta 
+	  donde se guardaran todos los archivos.
+	- IDE/Git Repositories/ debe aparecer el proyecto clonado, lo seleccionas/Import Maven Proyects/Finish.
+
+	Abrir Git(Terminal) de un Proyecto en el IDE (para los commits):
+	- Seleccionas el Proyecto/Show in Local Terminal/
+
+
+DATASOURCE
+	en aplication.properties:
+	spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver  [ubicacion: Maven Dependencies/mysql-conector/...]
+	spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+ABRINDO SPRING E IMPORTANTO TUS PROYECTOS POR PRIMERA VEZ :
+	Preferences / Maven / Installations
+	Preferences / Java / Installed JREs
+	Preferences / Java / Installed JREs / Execution Environments
+	Preferences / Java / Compiler
+	Proyect / Clean
+
+OpenJDK Amazon Corretto [Amazon Corretto 17]
+	- Spring Boot 3.0.1 requiere Java 17
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- SPRING --------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+STARTED: para probar un nuevo proyecto creado en Spring agrega esto a la clase de arrance del proyecto: [ https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started.html ]
+
+@RestController
+@SpringBootApplication
+public class ShoesformenWebApplication {
+	
+    @GetMapping("/")
+    String home() {
+        return "Hello World!";
+    }
+	
+	public static void main(String[] args) {
+		SpringApplication.run(ShoesformenWebApplication.class, args);
+	}
+
+}
+
+
+ERROR SPRING :
+	"Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured. Reason: Failed to determine a suitable driver class"
+
+	1. Prueba limpiar el proyecto y reiniciar el IDE varias veces, solo si no se soluciona sigues abajo.
+	2. CAUSA: es causado por la dependencia [spring-boot-starter-data-jpa] que sirve para Hibernate, JPA, Spring Data JPA.
+		SOLUCION [ http://www.masterspringboot.com/data-access/jpa-applications/solving-the-error-failed-to-auto-configure-a-datasource-spring-datasource-url-is-not-specified/ ]
+		a. prueba eliminar la dependencia JPA, actualizar el proyecto y volver a ejecutarlo si quieres verificar que ese es el ERROR.
+		b. la dependencia JPA debe utilizarce junto con una base de datos, puedes usar una BD embebido (h2,...) o una BD real (MySQL, SQLServer) 
+                   lo que elijas necesitara su Dependencia para dicha BD.
+		c. las BD embebido se configuran solo, pero si usas MySQL por ejemplo tendras que configurarlo correctamente en "application.properties".
+		d. alfinal deberas tener dos dependencias el de JPA y la de la BD que elegiste, si no es una BD enbedido deberá estar debidamente configurado.
+
+ERROR FAVICON.ICO: esta relacionado con el icono de la pagina que se coloca en la pestaña del navegador, para
+                   solucionar el error agregar en la cabecera de la pagina HTML:
+                   
+                   <link rel="shortcut icon" href="#"><!-- ERROR FAVICON.ICON -->
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+SPRING SECURITY  [ https://www.baeldung.com/spring-security-login ]
+
+AUTENTICACION requiere:
+1. Lista de Usuarios, que debe cuya dependencia debe ser manejado por Spring con @Bean o @Service y esta debe implementar la interfaz UserDetailsService para 
+   que Spring Security lo lea.
+2. Un encriptador, porque por defecto Spring Security solo autenticara a los usuarios cuyas contraseñas sean incriptadas, esto se utiliza en el ServiceImpl a la 
+   hora de guardar un nuevo Usuario para encriptar la contraseña antes de enviarlo a la Base de Datos.
+
+AUTORIZACION POR ROLES requiere:
+1. El Filtro que especificara todas las autorizaciones que tendra asi como los roles para una de estas.
+2. AuthenticationProvider, todas las autenticaciones seran procesadas por este. Obtiene los detalles del usuario con la ayuda de UserDetailsService. 
+   Cuando se crea un User de prueba con Spring, no se necesita definir esta propiedad, pero si traemos los usuarios de la Base de Datos SI.
+
+NOTA: para ambos es necesario un login segun las especificaciones que da Spring [ https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/form.html ]
+      y el LoginController es solo para redireccionar las paginas y LoginSuccessHandler es opcional.
+
+  +------------------------+            +-------------------------------------+
+  | i  UserDetailsService  |            |      c   WebSecurityConfig          |       +--------------------+
+  +------------------------+            |-------------------------------------|       |     @Cotroller     |
+              ↑                         | @Bean                               |<------| c LoginController  |
+  +------------------------+            | PasswordEncoder encriptador()       |       +--------------------+
+  |        @Service        |            |                                     |      
+  | c EmpDetailsService    |            | @Bean                               |      +-----------------------+
+  |------------------------|            | SecurityFilterChain security()      |      |      @Component       |
+  | @Override              |            |                                     |<-----| c LoginSuccessHandler |                   |
+  | loadUserByUsername(u)  |            | @Bean                               |      +-----------------------+
+  +------------------------+            | AuthenticationProvider authProvider |
+                                        +-------------------------------------+
+                                        
+
+
+--> [admin]: $2a$10$Jtfxa0EuEjZrfQ4OvR4WbuqD00OBIfIp.5Sv33A7G8ya3xTI542nq
+
+--> IMPORTANTE: Al crear una usuario de prueba en "WebSecurityConfig" y usar el metodo [roles("ADMIN")] no es necesario colocar el [ROLE_ ] este se coloca de manera 
+                automatica, pero si los usuarios vienen de una base de datos los roles SI DEBEN estar definidos como [ROLE_?] para la authentication. En el metodo de 
+                autorizacion tampoco se debe colocar [ hasAnyRole("ROLE_?" ] porque tambien se añade automaticamente.
+
+--> AUTORIZACION: Tenga en cuenta que el orden de los elementos antMatchers() es significativo; las reglas más específicas deben ir primero, seguidas de las más generales(permitAll)
+
+--> css/custom.css.map : dentro del archivo css compilado hay una referencia a un archivo map, si no añadiste este archivo a tu proyecto en el navegador te marcara un error
+                         aunque  la pagina se mostrara igual.
+
+MAPPING (/.../:::)
+@RequestMapping se utiliza al nivel de clase, aunque tambien puedes usarlo al nivel de metodo especificando GET, POST, etc
+@GetMapping se utiliza unicamente al nivel de metodo
+
+/empleados/new
+/request/Get
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--> Eliminacion de Roles: al eliminar un empleado se elimina tanto los registro de la tabla intermedia "Empleado-Rol" como los roles correspondientes en la tabla "Rol", 
+                          esto pasa cuando añadi la anotacion [cascade = CascadeType.ALL] en el atributo [Collection<Rol> roles] dentro de la clase "Empleado".
+                          SOLUCION: dejar las propiedades CASCADE a manos de la base de datos y quita estas propiedades que ya no son necesarias repetirlas en Java.
+
+--> Crear animacion SVG:
+	1. diseñas la imagen SVG en Corel Draw, teniendo en cuenta cada elemento-curva y su direccion de creacion, y lo exportas en SVG.
+	2. En Figma arrastras la imagen SVG, a cada curva que sera animado colocarlo dentro un contendor y darle un nombre, seleccionar todos las curvas que tendra la 
+           imagen y exportar en SVG y marcar mantener id que colocamos.
+        3. Arrastras la imagen SVG a VSCode y copias solo el codigo SVG [toda la etiqueta <svg>] y lo pegas en el HTML donde quieres que este.
+        4. verificar los Id's necesarios y ya puedes animarlos con CSS, Keyframe, etc.
+
+--> Logout: principalmente el Spring Security se encargará, solo tener en cuenta algunas propiedades y como se envia la informacion para cerrar sesion.
+
+	1. WebSecurityConfiguration: con ".logout" basta pero las demas lo personaliza [ https://www.baeldung.com/spring-security-logout ]
+                      .and().logout().clearAuthentication(true).invalidateHttpSession(true).logoutSuccessUrl("/login?logout").permitAll()   //.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).deleteCookies("JSESSIONID")
+                                     -                         - no invalida la sesion     - url para el logout              - permiso que los que pueden acceder al url de logout, IMPORTANTE
+	
+	2. Index.html: el metodo isAuthenticated() no lo creamos nosotros es automatico de Spring. 
+                      <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" class="dropdown-item">Sign out</a></li>
+
+	3. Login.html: si el index.html se logro deslogear correctamente el WebSecurityConfiguration te enviara al /login?logout enviando el parametro que colocaste en el login
+                       definimos que pasara si se accede al login con este parametro: en este caso mostrara un mensaje.
+                      <div th:if="${param.logout}">You have been logged out.</div>
+
+------------------------------------------
+--> CSS: el stilo [ ::-ms-reveal ] que te permite personalizar el "eye" del input password(el ojito) al parecer solo funciona en EDGE y no en CHROME.
+
+
+
+--> ALERTAS CREADAS CON ANIMACIONES: 
+
+	--> NO FUNCIONAN EN EL LOGIN: por mas que intente encontrar una accion que puediera disparar las alertas que cree, durante la authenticacion 
+                en el login no la encontré. Cuando lo maneja SPRING SECURITY nos redirecciona automaticamente a "login?error" o "index" cuando es 
+                correcto e incorrecto respecticamente. Mientras que cuando lo manejo con AJAX que lo necesito para activar las alertas y sus 
+                animaciones me responde con las paginas en formato text/HTML y siempre como "success" aunque sean datos incorrectos entonces no pude
+                distinguir las dos respuestas para porder activar las alertas con estas.
+	    
+	   SOLUCION: [ https://stackoverflow.com/questions/61256714/send-ajax-request-to-spring-security-login ] : la posible solucion que encontre 
+                fue personalizar las respuestas de authenticaciones cuando son correcta y incorrecta usando "AuthenticationSuccessHandler" y 
+                "AuthenticationFailureHandler", en las primeras pruebas no me funciono necesito conocimientos mas profundos en esto lo cual ya no 
+                puedo darle mas tiempo a este proyecto. Aplicare la solucion menos cutre de solucionar este problema.
+		
+		-- mantener separadas las paginas de login y index y que en estas al iniciar automaticamente se activen las alertas respectivamente 
+                   por solo 3 segundos (APLICADO..)
+                -- unir estas dos paginas en una sigle page, usar las respuestas del AJAX en txtHTML para redireccionar a donde corresponde, y VER 
+                   "NOSE COMO" ACTIVAR LAS ALERTAS.
+
+--> ANOTACIONES: para agregar anotaciones de validacion como @Size(min, max), se debe agregar la siguiente dependencia en el pom:
+
+		<dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+--> MANEJO DE ERROR CON "APIERROR": [ https://www.baeldung.com/global-error-handler-in-a-spring-rest-api ]
+
+--> Mostrar datos del Usuario autenticado en la pagina principal: se requiere una dependencia de "thymeleaf-extras-springsecurity6".
+    [ https://www.baeldung.com/spring-thymeleaf-user-info ]
+    IMPORTANTE: en las ultimas versiones de Spring y con JDK 17 es necesario esta version de la dependencia si usas otra version como 
+                "thymeleaf-extras-springsecurity5" no funcionara.
+
+
+--> PRINCIPALES DIFICULTADES DE LAS ALERTAS:
+	-- error 1: diseñar las alertas con esas animacion solo con CSS me fue imposible, porlo que tuve que aprender a trabajar con imagenes 
+                    vectoriales mas CSS para desarrollarlo.
+        -- error 2: las alerta en el Login(autenticacion), 
+        -- error 3: las alertas en el Home, al agregar un Usuario existia dos posibles errores que debian disparar dos diferentes alerta, uno 
+                    de Autorizacion y el otro de Validacion de Datos, pero ambos devolvian como respuesta el mismo error 403, lo que me impedia 
+                    diferenciarlas para mostrar las alerta de "NO AUTORIZADO" y "ERROR DE DATOS".
+                    -> para defirenciar las respuesta de error se personalizó la respuesta de error, de las validaciones(restricciones) 
+                       modificando el status del error que devuelve por el de 400, para esto se creo la clase "RestExceptionHandler".
+
+
+
+
+
+
+-

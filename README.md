@@ -1,5 +1,5 @@
 # Sistema de venta de calzados Web
-Sistema web con Spring y MySQL.
+Proyecto web con Spring y MySQL. Contiene CRUD, reporte Excel y PDF, Autenticacion y Autorizaciones por ROLES con Spring Security.
 
 ## Primer Avance
 - Se amplio y modificó la Base de Datos del proyecto de Escritorio [ShoesForMen][proyecto], para usarlo en este nuevo proyecto.
@@ -10,7 +10,7 @@ Sistema web con Spring y MySQL.
 |  |  |  |
 | :-------------: |:-------------:| :-----:|
 | ![][img_1] | ![][img_2] | ![][img_3] |
-| ![][img_4] | ![][img_5] | |
+| ![][img_4] | ![][img_5] | |   
 
 [img_1]: ./screenshot/imagen_1.png
 [img_2]: ./screenshot/imagen_2.png
@@ -18,7 +18,24 @@ Sistema web con Spring y MySQL.
 [img_4]: ./screenshot/imagen_4.png
 [img_5]: ./screenshot/imagen_5.png
 
+## Segundo y ultimo Avance
+- Se incorporo un Login al sistema utilizando Spring Security, este maneja la Autenticación y Autorización de los Usuarios atraves de sus ROLES. Esto restringe a los usuarios el acceso ah ciertas funciones.
+- Se añadieron alertas al sistema, para esto se crearon 4 imagenes vectoriales y se animaron con CSS.
+- Atraves de Ajax dependiendo de las respuestas de las solicitudes se activan las alertas correspondientes al igual que sus animaciones, para esto se tuvo que personalizar algunas respuesta de excepciones para modificar su codigo de HTTP status.
+- Se incorporó en este repositorio un archivo de texto dentro de la carpeta Extra que contiene errores, soluciones y observaciones que fui encontrando en la realización de este proyecto.
+
+|  |  |  |
+| :-------------: |:-------------:| :-----:|
+| ![][img_6] | ![][img_7] | ![][img_8] |
+| ![][img_9] |            |            |
+
+[img_6]: ./screenshot/imagen_6.png
+[img_7]: ./screenshot/imagen_7.png
+[img_8]: ./screenshot/imagen_8.png
+[img_9]: ./screenshot/imagen_9.gif
+
 ---
+
 
 ### Herramientas utilizadas:
 - **Spring Tool Suite 4 [ 4.17.1 ]** como IDE principal para el desarrollo de este sistema.
@@ -30,7 +47,7 @@ Sistema web con Spring y MySQL.
 
 ### Tecnologias y versiones:
 - OpenJDK 17 [ Amazon Corretto 17.0.5.8.1 LTS ]
-- Sprint Boot [ 3.0.1 ]
+- Sprint Boot [ 3.0.1 ] 
 - Apache Maven [ 3.0.1 ]
 - Bootstrap [ 5.2.2 ]
 - JQuery ( AJAX )
