@@ -1,5 +1,7 @@
-# Sistema de venta de calzados Web
-Proyecto web con Spring y MySQL. Contiene CRUD, reporte Excel y PDF, Autenticacion y Autorizaciones por ROLES con Spring Security.
+# Proyecto web de calzados | :clapper: [video de muestra][video_url]
+Proyecto web con Spring y MySQL. Contiene CRUD, reporte Excel y PDF, Autenticación y Autorizaciones por ROLES con Spring Security.
+
+[video_url]: https://youtu.be/luCPzEpEAzU
 
 ## Primer Avance
 - Se amplio y modificó la Base de Datos del proyecto de Escritorio [ShoesForMen][proyecto], para usarlo en este nuevo proyecto.
