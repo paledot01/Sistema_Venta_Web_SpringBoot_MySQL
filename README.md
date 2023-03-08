@@ -20,11 +20,11 @@ Proyecto web con Spring y MySQL. Contiene CRUD, reporte Excel y PDF, Autenticaci
 [img_4]: ./screenshot/imagen_4.png
 [img_5]: ./screenshot/imagen_5.png
 
-## Segundo y ultimo Avance
+## Segundo y último Avance
 - Se incorporo un Login al sistema utilizando Spring Security, este maneja la Autenticación y Autorización de los Usuarios atraves de sus ROLES. Esto restringe a los usuarios el acceso ah ciertas funciones.
 - Se añadieron alertas al sistema, para esto se crearon 4 imagenes vectoriales y se animaron con CSS.
 - Atraves de Ajax dependiendo de las respuestas de las solicitudes se activan las alertas correspondientes al igual que sus animaciones, para esto se tuvo que personalizar algunas respuesta de excepciones para modificar su codigo de HTTP status.
-- Se incorporó en este repositorio un archivo de texto dentro de la carpeta Extra que contiene errores, soluciones y observaciones que fui encontrando en la realización de este proyecto.
+- Se incorporó en este repositorio un archivo de texto dentro de la carpeta "extra" que contiene errores, soluciones y observaciones que fui encontrando en la realización de este proyecto.
 
 |  |  |  |
 | :-------------: |:-------------:| :-----:|
@@ -60,5 +60,5 @@ Proyecto web con Spring y MySQL. Contiene CRUD, reporte Excel y PDF, Autenticaci
 ---
 
 [proyecto]: https://github.com/paledot01/Sistema_Ventas_JavaSE_MySQL
-[plantilla]: https://paledot02.github.io/Exercises_Bootstrap_02/
+[plantilla]: https://paledot02.github.io/Frontend_Exercise_02/
 
