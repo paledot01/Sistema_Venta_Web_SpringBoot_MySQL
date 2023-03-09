@@ -204,8 +204,10 @@ AUTORIZACION POR ROLES requiere:
 2. AuthenticationProvider, todas las autenticaciones seran procesadas por este. Obtiene los detalles del usuario con la ayuda de UserDetailsService. 
    Cuando se crea un User de prueba con Spring, no se necesita definir esta propiedad, pero si traemos los usuarios de la Base de Datos SI.
 
-NOTA: para ambos es necesario un login segun las especificaciones que da Spring [ https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/form.html ]
-      y el LoginController es solo para redireccionar las paginas y LoginSuccessHandler es opcional.
+NOTA: 
+	1. para ambos es necesario un login segun las especificaciones que da Spring [ https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/form.html ]
+      	   y el LoginController es solo para redireccionar las paginas y LoginSuccessHandler es opcional.
+	2. a la hora de insertar un "usuario" se inserta tambien un "rol" para ese "usuario", en el mismo metodo.
 
   +------------------------+            +-------------------------------------+
   | i  UserDetailsService  |            |      c   WebSecurityConfig          |       +--------------------+
