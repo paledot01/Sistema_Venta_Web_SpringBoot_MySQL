@@ -3,6 +3,10 @@ Proyecto web con Spring y MySQL. Contiene CRUD, reporte Excel y PDF, Autenticaci
 
 [video_url]: https://youtu.be/luCPzEpEAzU
 
+Acceso inicial:
+- User: kevinB
+- Pass: admin
+
 ## Primer Avance
 - Se amplio y modificó la Base de Datos del proyecto de Escritorio [ShoesForMen][proyecto], para usarlo en este nuevo proyecto.
 - Se creo una :eye: [Plantilla Web][plantilla] para este sistema en Bootstrap.
